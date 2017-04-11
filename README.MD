@@ -3,11 +3,11 @@ Traffic Lights Emulator
 ## Design
 
 ## How to run:
-#### Start app
+### Start app
 npm start
-#### Start app with no realtime delay with the same output
+### Start app with no realtime delay (the same output)
 npm run start:fast
-#### Run tests
+### Run tests
 npm test
-#### Run tests with code coverage tool istanbul
+### Run tests with code coverage tool istanbul
 npm run coverage
