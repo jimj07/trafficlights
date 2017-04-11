@@ -1,3 +1,4 @@
+'use strict';
 const trafficLight = require('./trafficLight');
 const STATES = require('./states');
 
@@ -6,15 +7,27 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    let subscribers = [];
    const lights = [first, second];
 
-   const getState = () => {
-      return STATES.NAMES[state];
+   // ********************************
+   //       Private Functions
+   // ********************************
+   const setState = (s) => {
+      state = s;
+      lights[0].setState(s);
+      lights[1].setState(s);
+      notify();
    }
 
-   const setState = (s) => {
-      for (l of lights) {
-         l.setState(s);
+   const notify = () => {
+      for (const s of subscribers) {
+         s();
       }
-      notify();
+   }
+
+   // ********************************
+   //       Public Functions
+   // ********************************
+   const getState = () => {
+      return STATES.NAMES[state];
    }
 
    const turnGreen = () => {
@@ -35,12 +48,6 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
 
    const subscribe = (cb) => {
       subscribers.push(cb);
-   }
-
-   const notify = () => {
-      for(s of subscribers) {
-         s();
-      }
    }
 
    return {

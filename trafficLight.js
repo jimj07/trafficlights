@@ -5,6 +5,9 @@ module.exports = (defaultName = 'Traffic Light', defaultState = STATES.RED) => {
    let state = defaultState;
    let name = defaultName;
 
+   // ********************************
+   //       Public Functions
+   // ********************************
    const getState = () => {
       return STATES.NAMES[state];
    }
