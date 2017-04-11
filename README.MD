@@ -1,6 +1,5 @@
-# Forecast
+# Traffic Lights
 Traffic Lights Emulator
-## Design
 
 ## How to run:
 ### Start app

@@ -10,13 +10,12 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    // ********************************
    //       Private Functions
    // ********************************
-   const setState = (s) => {
-      state = s;
-      lights[0].setState(s);
-      lights[1].setState(s);
-      notify();
-   }
 
+   const setState = (s, cb) => {
+      state = s;
+      notify();
+      cb();
+   }
    const notify = () => {
       for (const s of subscribers) {
          s();
@@ -31,15 +30,24 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    }
 
    const turnGreen = () => {
-      setState(STATES.GREEN);
+      setState(STATES.GREEN, () => {
+         lights[0].turnGreen();
+         lights[1].turnGreen();
+      });
    }
 
    const turnYellow = () => {
-      setState(STATES.YELLOW);
+      setState(STATES.YELLOW, () => {
+         lights[0].turnYellow();
+         lights[1].turnYellow();
+      });
    }
 
    const turnRed = () => {
-      setState(STATES.RED);
+      setState(STATES.RED, () => {
+         lights[0].turnRed();
+         lights[1].turnRed();
+      });
    }
 
    const status = () => {

@@ -23,14 +23,30 @@ describe('trafficLight', () => {
       });
    });
 
-   describe('setState()', () => {
-      it('should set state to Yellow', () => {
+   describe('turnGreen()', () => {
+      it('should return green', () => {
          const tl = trafficLight();
-         tl.setState(STATES.YELLOW);
+         tl.turnGreen();
+         const state = tl.getState();
+         expect(state).equals(STATES.NAMES[STATES.GREEN]);
+      });
+   });
 
+   describe('turnYellow()', () => {
+      it('should return yellow', () => {
+         const tl = trafficLight();
+         tl.turnYellow();
          const state = tl.getState();
          expect(state).equals(STATES.NAMES[STATES.YELLOW]);
       });
    });
 
+   describe('turnRed()', () => {
+      it('should return yellow', () => {
+         const tl = trafficLight('', STATES.YELLOW);
+         tl.turnRed();
+         const state = tl.getState();
+         expect(state).equals(STATES.NAMES[STATES.RED]);
+      });
+   });
 });

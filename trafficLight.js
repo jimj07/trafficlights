@@ -6,6 +6,14 @@ module.exports = (defaultName = 'Traffic Light', defaultState = STATES.RED) => {
    let name = defaultName;
 
    // ********************************
+   //       Private Functions
+   // ********************************
+
+   const setState = (s) => {
+      state = s;
+   }
+
+   // ********************************
    //       Public Functions
    // ********************************
    const getState = () => {
@@ -16,13 +24,23 @@ module.exports = (defaultName = 'Traffic Light', defaultState = STATES.RED) => {
       return `${name} is ${getState()}`;
    }
 
-   const setState = (s) => {
-      state = s;
+   const turnGreen = () => {
+      setState(STATES.GREEN);
+   }
+
+   const turnYellow = () => {
+      setState(STATES.YELLOW);
+   }
+
+   const turnRed = () => {
+      setState(STATES.RED);
    }
 
    return {
       getState,
       status,
-      setState
+      turnGreen,
+      turnRed,
+      turnYellow
    };
 }

@@ -119,5 +119,34 @@ describe('intersection', () => {
          expect(northSouth.getState()).to.equals(northSouthLastState);
          expect(eastWest.getState()).to.equals(eastWestLastState);
       });
+
+      it('should have no delay if fastForward is enabled', () => {
+         this.clock = sinon.useFakeTimers();
+         const northLight = trafficLight('North');
+         const southLight = trafficLight('South');
+         const eastLight = trafficLight('East');
+         const westLight = trafficLight('West');
+         const northSouth = trafficLightPair(northLight, southLight);
+         const eastWest = trafficLightPair(eastLight, westLight);
+
+         DEFAULT_RULE.fastForward = true;
+
+         const int = intersection(northSouth, eastWest, DEFAULT_RULE);
+         const callBack = sinon.spy();
+         int.start(callBack);
+
+         this.clock.tick(1000);
+         const northSouthLastState = northSouth.getState();
+         const eastWestLastState = eastWest.getState();
+
+         // intersection is stop, no more changes
+         this.clock.tick(GREEN_LENGTH);
+         expect(northSouth.getState()).to.equals(northSouthLastState);
+         expect(eastWest.getState()).to.equals(eastWestLastState);
+
+         this.clock.tick(YELLOW_LENGTH);
+         expect(northSouth.getState()).to.equals(northSouthLastState);
+         expect(eastWest.getState()).to.equals(eastWestLastState);
+      });
    });
 });

@@ -2,7 +2,6 @@
 const moment = require('moment');
 const trafficLight = require('./trafficLight');
 const trafficLightPair = require('./trafficLightPair');
-const STATES = require('./states');
 const DEFAULT_RULE = {
    interval: 5 * 60 * 1000,
    yellowLength: 30 * 1000,
@@ -35,7 +34,7 @@ module.exports = (northSouth, eastWest, rule = DEFAULT_RULE) => {
       eastWest.turnGreen();
 
       if (fastForward) {
-         actualYellowLength = actualGreenLength = 1;
+         actualYellowLength = actualGreenLength = 0;
       }
    }
 
