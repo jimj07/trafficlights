@@ -7,15 +7,6 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    const lights = [first, second];
 
    // ********************************
-   //       Private Functions
-   // ********************************
-
-   const setState = (s, cb) => {
-      state = s;
-      cb();
-   }
-
-   // ********************************
    //       Public Functions
    // ********************************
    const getState = () => {
