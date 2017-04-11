@@ -65,29 +65,4 @@ describe('trafficLightPair', () => {
       });
    });
 
-   describe('subscribe()', () => {
-      it('should be notified when state is changed', () => {
-         const tl1 = trafficLight('tl1', STATES.YELLOW);
-         const tl2 = trafficLight('tl2', STATES.YELLOW);
-         const tlPair = trafficLightPair(tl1, tl2);
-         const expectStatus = `${tl1.status()}\n${tl2.status()}`;
-         let isNotified = false;
-
-         tlPair.subscribe(() => {
-            isNotified = true;
-         });
-
-         tlPair.turnGreen();
-         expect(isNotified).to.be.true;
-
-         isNotified = false;
-         tlPair.turnRed();
-         expect(isNotified).to.be.true;
-
-         isNotified = false;
-         tlPair.turnGreen();
-         expect(isNotified).to.be.true;
-      });
-   });
-
 });

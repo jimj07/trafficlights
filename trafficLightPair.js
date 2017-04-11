@@ -4,7 +4,6 @@ const STATES = require('./states');
 
 module.exports = (first = trafficLight(), second = trafficLight(), defaultState = STATES.RED) => {
    let state = defaultState;
-   let subscribers = [];
    const lights = [first, second];
 
    // ********************************
@@ -13,13 +12,7 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
 
    const setState = (s, cb) => {
       state = s;
-      notify();
       cb();
-   }
-   const notify = () => {
-      for (const s of subscribers) {
-         s();
-      }
    }
 
    // ********************************
@@ -30,32 +23,25 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    }
 
    const turnGreen = () => {
-      setState(STATES.GREEN, () => {
-         lights[0].turnGreen();
-         lights[1].turnGreen();
-      });
+      state = STATES.GREEN
+      lights[0].turnGreen();
+      lights[1].turnGreen();
    }
 
    const turnYellow = () => {
-      setState(STATES.YELLOW, () => {
-         lights[0].turnYellow();
-         lights[1].turnYellow();
-      });
+      state = STATES.YELLOW
+      lights[0].turnYellow();
+      lights[1].turnYellow();
    }
 
    const turnRed = () => {
-      setState(STATES.RED, () => {
-         lights[0].turnRed();
-         lights[1].turnRed();
-      });
+      state = STATES.RED;
+      lights[0].turnRed();
+      lights[1].turnRed();
    }
 
    const status = () => {
       return `${first.status()}\n${second.status()}`;
-   }
-
-   const subscribe = (cb) => {
-      subscribers.push(cb);
    }
 
    return {
@@ -63,7 +49,6 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
       status,
       turnGreen,
       turnRed,
-      turnYellow,
-      subscribe
+      turnYellow
    };
 }
