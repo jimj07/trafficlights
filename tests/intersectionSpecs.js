@@ -1,6 +1,4 @@
 const expect = require('chai').expect;
-const assert = require('chai').assert;
-const chai = require('chai');
 const sinon = require('sinon');
 const trafficLight = require('../trafficLight');
 const trafficLightPair = require('../trafficLightPair');
@@ -51,22 +49,22 @@ describe('intersection', () => {
 
          const int = intersection(northSouth, eastWest, DEFAULT_RULE);
 
-         let expectOutput = `09:00:00 am\nNorth is Red\nSouth is Red\nEast is Green\nWest is Green\n`;
+         let expectOutput = '09:00:00 am\nNorth is Red\nSouth is Red\nEast is Green\nWest is Green\n';
          const report = (output) => {
             expect(output).to.equals(expectOutput);
-         }
+         };
 
          const callBack = sinon.spy(report);
          int.start(callBack);
 
          // NS: RED, EW: YELLOW
-         expectOutput = `09:04:30 am\nNorth is Red\nSouth is Red\nEast is Yellow\nWest is Yellow\n`;
+         expectOutput = '09:04:30 am\nNorth is Red\nSouth is Red\nEast is Yellow\nWest is Yellow\n';
          this.clock.tick(GREEN_LENGTH);
          expect(northSouth.getState()).to.equals(STATES.NAMES[STATES.RED]);
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.YELLOW]);
 
          // NS: GREEN, EW: RED
-         expectOutput = `09:05:00 am\nNorth is Green\nSouth is Green\nEast is Red\nWest is Red\n`;
+         expectOutput = '09:05:00 am\nNorth is Green\nSouth is Green\nEast is Red\nWest is Red\n';
          this.clock.tick(YELLOW_LENGTH);
          expect(northSouth.getState()).to.equals(STATES.NAMES[STATES.GREEN]);
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.RED]);
@@ -77,7 +75,7 @@ describe('intersection', () => {
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.RED]);
 
          // NS: YELLOW, EW: RED
-         expectOutput = `09:09:30 am\nNorth is Yellow\nSouth is Yellow\nEast is Red\nWest is Red\n`;
+         expectOutput = '09:09:30 am\nNorth is Yellow\nSouth is Yellow\nEast is Red\nWest is Red\n';
          this.clock.tick(10);
          expect(northSouth.getState()).to.equals(STATES.NAMES[STATES.YELLOW]);
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.RED]);
@@ -88,7 +86,7 @@ describe('intersection', () => {
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.RED]);
 
          // NS: RED, EW:GREEN
-         expectOutput = `09:10:00 am\nNorth is Red\nSouth is Red\nEast is Green\nWest is Green\n`;
+         expectOutput = '09:10:00 am\nNorth is Red\nSouth is Red\nEast is Green\nWest is Green\n';
          this.clock.tick(10);
          expect(northSouth.getState()).to.equals(STATES.NAMES[STATES.RED]);
          expect(eastWest.getState()).to.equals(STATES.NAMES[STATES.GREEN]);

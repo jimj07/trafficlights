@@ -1,6 +1,4 @@
 const expect = require('chai').expect;
-const assert = require('chai').assert;
-const chai = require('chai');
 const trafficLight = require('../trafficLight');
 const trafficLightPair = require('../trafficLightPair');
 const STATES = require('../states');

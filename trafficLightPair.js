@@ -11,29 +11,29 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
    // ********************************
    const getState = () => {
       return STATES.NAMES[state];
-   }
+   };
 
    const turnGreen = () => {
-      state = STATES.GREEN
+      state = STATES.GREEN;
       lights[0].turnGreen();
       lights[1].turnGreen();
-   }
+   };
 
    const turnYellow = () => {
-      state = STATES.YELLOW
+      state = STATES.YELLOW;
       lights[0].turnYellow();
       lights[1].turnYellow();
-   }
+   };
 
    const turnRed = () => {
       state = STATES.RED;
       lights[0].turnRed();
       lights[1].turnRed();
-   }
+   };
 
    const status = () => {
       return `${first.status()}\n${second.status()}`;
-   }
+   };
 
    return {
       getState,
@@ -42,4 +42,4 @@ module.exports = (first = trafficLight(), second = trafficLight(), defaultState 
       turnRed,
       turnYellow
    };
-}
+};
